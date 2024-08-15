@@ -13,10 +13,18 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('pastewithoutlinebreaks.helloWorld', () => {
+	const disposable = vscode.commands.registerCommand('pastewithoutlinebreaks.helloWorld', async () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from pasteWithoutLineBreaks!');
+		const editor = vscode.window.activeTextEditor;
+		if (editor) {
+		  const clipboardText = await vscode.env.clipboard.readText();
+		  const transformedText = clipboardText.replace(/\r?\n|\r/g, ' ');
+		  await vscode.env.clipboard.writeText(transformedText);
+		  editor.edit(editBuilder => {
+			editBuilder.insert(editor.selection.active, transformedText);
+		  });
+		}
 	});
 
 	context.subscriptions.push(disposable);
