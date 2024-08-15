@@ -3,6 +3,7 @@
   "displayName": "pasteWithoutLineBreaks",
   "description": "",
   "version": "0.0.1",
+  "publisher": "pschreiber1",
   "engines": {
     "vscode": "^1.92.0"
   },
@@ -14,8 +15,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "pastewithoutlinebreaks.helloWorld",
-        "title": "Hello World"
+        "command": "pastewithoutlinebreaks.pastewithoutlinebreaks",
+        "title": "Paste Without Linebreaks"
       }
     ]
   },
